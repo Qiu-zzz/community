@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * @author gree
@@ -27,9 +28,8 @@ public class GithubProvider {
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
-            String string = response.body().string();
-            String token = string.split("&")[0].split("=")[1];
-            return token;
+            String string = Objects.requireNonNull(response.body()).string();
+            return string.split("&")[0].split("=")[1];
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,8 +44,7 @@ public class GithubProvider {
 
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
-            GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
-            return githubUser;
+            return JSON.parseObject(string, GithubUser.class);
         } catch (IOException e) {
         }
         return null;

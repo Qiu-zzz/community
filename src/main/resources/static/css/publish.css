@@ -1,0 +1,26 @@
+body{
+    background: #efefef;
+}
+
+.publish-main{
+    background: #ffffff;
+    margin: 30px 30px 30px 30px;
+}
+.publish-button{
+    float: right;
+    margin-bottom: 15px;
+}
+.publish-alert{
+    height: 8px;
+    width: 150px;
+}
+.media-object{
+    width: 38px !important;
+    height: 38px !important;
+}
+
+.article-content{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999999;
+}

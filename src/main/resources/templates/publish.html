@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/publish.css">
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <title>Title</title>
+    <title>发布</title>
 
 </head>
 <body>
@@ -17,10 +17,10 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">我的社区</span>
+                <span class="sr-only">发布</span>
 
             </button>
-            <a class="navbar-brand" href="#">我的社区</a>
+            <a class="navbar-brand" href="/">我的社区</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,9 +32,7 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li th:if="${session.user != null}">
-                    <a href="/publish">发布</a>
-                </li>
+
                 <li class="dropdown" th:if="${session.user != null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false" th:text="${session.user.getName()}"> <span class="caret"></span></a>
@@ -57,26 +55,39 @@
     <div class="container-fluid  publish-main">
         <div class="row">
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="">
-                <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h2>
-                <hr>
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object img-rounded" src="https://avatars0.githubusercontent.com/u/39342407?v=4" alt="...">
-                        </a>
+                <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
+                <form action="/publish" method="post">
+                    <div class="form-group">
+                        <label for="title">问题标题（简单扼要）</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="问题标题...">
                     </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">First</h4>
-                        content
-                        <br>
-                        <span class="article-content">回复了问题 • 3人关注 • 2个回复 • 31此浏览 • 1小时前</span>
+                    <div class="form-group">
+                        <label for="description">问题补充（必填，请参照右侧提示）</label>
+                        <textarea name="description" id="description" class="form-control" cols="30"
+                                  rows="10" style="resize: none"></textarea>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="tag">添加标签</label>
+                        <input type="text" id="tag" class="form-control" name="tag" placeholder="添加标签...">
+                    </div>
+
+                    <div th:if="${error !=null}">
+                        <div class="alert alert-danger" th:text=" ${error}" role="alert">
+                        </div>
+                    </div>
+                    <button type="submit"
+                            class="btn btn-default btn-success publish-button ">
+                        发布
+                    </button>
+                </form>
             </div>
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="">
                 <h3>
-                    热门话题
+                    问题发起指南
                 </h3>
+                <p>• 问题标题：请用精简的语言描述您发布的问题，不超过25字</p>
+                <p>• 问题补充：详细补充您的问题内容，并确保问题描述清晰直观，并提供一些相关的资料</p>
+                <p>• 选择标签：选择一个或者多个合适的标签，用逗号分隔，每个标签不超过10个字</p>
             </div>
         </div>
     </div>
