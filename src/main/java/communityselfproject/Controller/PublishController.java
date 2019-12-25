@@ -41,7 +41,7 @@ public class PublishController {
             HttpServletRequest request,
             Model model
     ){
-        User user = null;
+        User user = new User();
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies){
             if (cookie.getName().equals("token")){
@@ -61,7 +61,7 @@ public class PublishController {
             article.setTitle(title);
             article.setDescription(description);
             article.setTag(tag);
-            article.setCreator(user.getAccountId());
+            article.setCreator(user.getId());
             article.setGmtCreate(System.currentTimeMillis());
             article.setGmtModified(article.getGmtCreate());
             articleMapper.create(article);

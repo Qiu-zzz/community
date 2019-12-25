@@ -2,6 +2,8 @@ package communityselfproject.model;
 
 import lombok.Data;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 /**
  * @author qwj
  * @version 1.0

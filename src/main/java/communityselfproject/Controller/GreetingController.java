@@ -41,6 +41,7 @@ public class GreetingController {
         }
 
         List<ArticleDTO> articleDTOList = articleService.list();
+        System.out.println();
         model.addAttribute("articles",articleDTOList);
         return "index";
     }

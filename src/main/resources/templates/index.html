@@ -59,17 +59,18 @@
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="">
                 <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h2>
                 <hr>
-                <div class="media">
+
+                <div class="media" th:each="article : ${articles}">
                     <div class="media-left">
                         <a href="#">
-                            <img class="media-object img-rounded" src="https://avatars0.githubusercontent.com/u/39342407?v=4" alt="...">
+                            <img class="media-object img-rounded" th:src="${article.user.avatarUrl}" src="https://avatars0.githubusercontent.com/u/39342407?v=4" alt="...">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">First</h4>
-                        content
+                        <h4 class="media-heading" th:text="${article.title}">First</h4>
+                        <span th:text="${article.description}"></span>
                         <br>
-                        <span class="article-content">回复了问题 • 3人关注 • 2个回复 • 31此浏览 • 1小时前</span>
+                        <span class="article-content"> <span th:text="${article.commentCount}"></span>个回复 • <span th:text="${article.viewCount}"></span>次浏览 • <span th:text="${#dates.format(article.gmtCreate,'yyyy-MM-dd hh:mm')}"></span></span>
                     </div>
                 </div>
             </div>
