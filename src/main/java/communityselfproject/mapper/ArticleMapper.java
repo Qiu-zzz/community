@@ -1,10 +1,13 @@
 package communityselfproject.mapper;
 
+import communityselfproject.dto.ArticleDTO;
 import communityselfproject.model.Article;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -20,6 +23,21 @@ public interface ArticleMapper {
             "values(#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{tag})")
     void  create(Article article);
 
-    @Select("select * from article")
-    List<Article> list();
+    /**
+    *
+    */
+    @Select("select * from article limit #{offset}, #{size}")
+    List<Article> list(@Param(value = "offset") Integer offset, @Param(value = "size") Integer size);
+
+    @Select("select * from article where creator=${userId} limit #{offset}, #{size} ")
+    List<Article> listById(@Param(value = "userId") Integer userId, @Param(value = "offset") Integer offset, @Param(value = "size") Integer size);
+
+    @Select("select count(1) from article")
+    Integer count();
+
+    @Select("select count(1) from article where creator=${userId}")
+    Integer countByUserId(@Param(value = "userId") Integer userId);
+
+    @Select("select * from article where id=${id}")
+    Article getById(@Param(value = "id") Integer id);
 }

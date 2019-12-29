@@ -18,9 +18,34 @@ body{
     width: 38px !important;
     height: 38px !important;
 }
-
+.container-fluid{
+    margin: auto;
+    width: 1170px;
+    max-width: 1500px !important;
+}
 .article-content{
     font-size: 12px;
     font-weight: normal;
     color: #999999;
+}
+.index-page{
+    float: right;
+}
+.profile .section{
+    margin-top: 15px;
+}
+.article-detail{
+    margin-top: 30px;
+    font-family: "Microsoft Yahei", serif;
+}
+.article-edit{
+    color: #fff;
+    margin: 10px 0 10px 0;
+}
+.side-body{
+    margin-left: -1px;
+    border-left: 1px solid #e6e6e6;
+}
+.main-content{
+    border-right: 1px solid #e6e6e6;
 }
