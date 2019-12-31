@@ -6,9 +6,11 @@ import communityselfproject.mapper.ArticleMapper;
 import communityselfproject.mapper.UserMapper;
 import communityselfproject.model.Article;
 import communityselfproject.model.User;
+import communityselfproject.model.UserExample;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +51,13 @@ public class ArticleService {
 
 
         for (Article article : articleList) {
-            User user = userMapper.findById(article.getCreator());
+
+            UserExample example = new UserExample();
+            example.createCriteria().andIdEqualTo(article.getCreator());
+            List<User> user = userMapper.selectByExample(example);
             ArticleDTO articleDTO = new ArticleDTO();
             BeanUtils.copyProperties(article, articleDTO);
-            articleDTO.setUser(user);
+            articleDTO.setUser(user.get(0));
             articleDTOList.add(articleDTO);
         }
         paginationDTO.setArticleDTOS(articleDTOList);
@@ -85,10 +90,12 @@ public class ArticleService {
 
 
         for (Article article : articleList) {
-            User user = userMapper.findById(article.getCreator());
+            UserExample example = new UserExample();
+            example.createCriteria().andIdEqualTo(article.getCreator());
+            List<User> user = userMapper.selectByExample(example);
             ArticleDTO articleDTO = new ArticleDTO();
             BeanUtils.copyProperties(article, articleDTO);
-            articleDTO.setUser(user);
+            articleDTO.setUser(user.get(0));
             articleDTOList.add(articleDTO);
         }
         paginationDTO.setArticleDTOS(articleDTOList);
@@ -101,8 +108,12 @@ public class ArticleService {
         Article article = articleMapper.getById(id);
         ArticleDTO articleDTO = new ArticleDTO();
         BeanUtils.copyProperties(article,articleDTO);
-        User user = userMapper.findById(article.getCreator());
-        articleDTO.setUser(user);
+        UserExample example = new UserExample();
+        example.createCriteria().andIdEqualTo(article.getCreator());
+        List<User> user = userMapper.selectByExample(example);
+        articleDTO.setUser(user.get(0));
         return articleDTO;
     }
+
+
 }

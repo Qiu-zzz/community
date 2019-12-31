@@ -49,3 +49,6 @@ body{
 .main-content{
     border-right: 1px solid #e6e6e6;
 }
+.error-body{
+    background-color: #ffffff;
+}

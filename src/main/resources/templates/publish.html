@@ -2,11 +2,11 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/publish.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/publish.css">
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <title>发布</title>
 
 </head>
@@ -18,18 +18,19 @@
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 main-content" style="">
                 <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
                 <form action="/publish" method="post">
+                    <input type="hidden" name="id" th:value="${id}">
                     <div class="form-group">
-                        <label for="title">问题标题（简单扼要）</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="问题标题...">
+                        <label for="title">标题（简单扼要）</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="问题标题..." th:value="${title}">
                     </div>
                     <div class="form-group">
-                        <label for="description">问题补充（必填，请参照右侧提示）</label>
+                        <label for="description">文章（必填，请参照右侧提示）</label>
                         <textarea name="description" id="description" class="form-control" cols="30"
-                                  rows="10" style="resize: none"></textarea>
+                                  rows="10" style="resize: none" th:text="${description}"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="tag">添加标签</label>
-                        <input type="text" id="tag" class="form-control" name="tag" placeholder="添加标签...">
+                        <input type="text" id="tag" class="form-control" name="tag" placeholder="添加标签..." th:value="${tag}">
                     </div>
 
                     <div th:if="${error !=null}">

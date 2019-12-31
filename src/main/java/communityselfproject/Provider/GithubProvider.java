@@ -43,7 +43,7 @@ public class GithubProvider {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            String string = response.body().string();
+            String string = Objects.requireNonNull(response.body()).string();
             return JSON.parseObject(string, GithubUser.class);
         } catch (IOException e) {
         }

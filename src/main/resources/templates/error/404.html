@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/publish.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>Blog-五初</title>
+
+</head>
+<body>
+<div th:replace="navigation :: nav"></div>
+<div class="publish-body">
+    <div class="container-fluid  publish-main">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content" style="">
+                <div class="jumbotron error-body">
+                    <h2>糟糕，您的页面不见了</h2>
+                    <p th:text="${message}">请您稍后重新连接</p>
+                    <p><a class="btn btn-primary" href="/" role="button">点击回到主页</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
