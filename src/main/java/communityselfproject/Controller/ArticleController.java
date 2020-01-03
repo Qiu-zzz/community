@@ -22,6 +22,7 @@ public class ArticleController {
 
     @GetMapping("/article/{id}")
     public String article(@PathVariable(name = "id")Integer id,Model model){
+        articleService.incView(id);
         ArticleDTO articleDTO = articleService.getById(id);
         model.addAttribute("article",articleDTO);
         return "article";

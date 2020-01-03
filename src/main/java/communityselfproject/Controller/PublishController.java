@@ -1,5 +1,7 @@
 package communityselfproject.Controller;
 
+import communityselfproject.exception.CustomizeErrorCode;
+import communityselfproject.exception.CustomizeException;
 import communityselfproject.mapper.ArticleMapper;
 import communityselfproject.mapper.UserMapper;
 import communityselfproject.model.Article;
@@ -96,7 +98,10 @@ public class PublishController {
                 return "/publish";
             }
             article.setGmtModified(System.currentTimeMillis());
-            articleMapper.update(article);
+            int updated = articleMapper.update(article);
+            if (updated != 1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
         return "redirect:/";
     }

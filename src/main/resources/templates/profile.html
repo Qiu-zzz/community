@@ -21,13 +21,16 @@
                 <hr>
                 <div class="media" th:each="article : ${articles.articleDTOS}">
                     <div class="media-left">
-                        <a href="#">
+                        <a th:href="@{'/article/'+ ${article.id}}">
                             <img class="media-object img-rounded" th:src="${article.user.avatarUrl}"
                                  src="https://avatars0.githubusercontent.com/u/39342407?v=4" alt="...">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading" th:text="${article.title}"></h4>
+                        <h4 class="media-heading" >
+                            <a th:text="${article.title}" th:href="@{'/article/'+ ${article.id}}">
+                            </a>
+                        </h4>
                         <br>
                         <span class="article-content">
                             <span th:text="${article.commentCount}">

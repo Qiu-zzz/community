@@ -2,6 +2,8 @@ package communityselfproject.service;
 
 import communityselfproject.dto.ArticleDTO;
 import communityselfproject.dto.PaginationDTO;
+import communityselfproject.exception.CustomizeErrorCode;
+import communityselfproject.exception.CustomizeException;
 import communityselfproject.mapper.ArticleMapper;
 import communityselfproject.mapper.UserMapper;
 import communityselfproject.model.Article;
@@ -106,6 +108,9 @@ public class ArticleService {
 
     public ArticleDTO getById(Integer id) {
         Article article = articleMapper.getById(id);
+        if (article == null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         ArticleDTO articleDTO = new ArticleDTO();
         BeanUtils.copyProperties(article,articleDTO);
         UserExample example = new UserExample();
@@ -116,4 +121,8 @@ public class ArticleService {
     }
 
 
+    public void incView(Integer id) {
+        Article article = articleMapper.getById(id);
+        articleMapper.updateViewCount(article);
+    }
 }

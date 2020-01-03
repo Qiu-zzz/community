@@ -20,9 +20,6 @@ public interface ArticleMapper {
             "values(#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{tag})")
     void  create(Article article);
 
-    /**
-    *
-    */
     @Select("select * from article limit #{offset}, #{size}")
     List<Article> list(@Param(value = "offset") Integer offset, @Param(value = "size") Integer size);
 
@@ -38,10 +35,9 @@ public interface ArticleMapper {
     @Select("select * from article where id=#{id}")
     Article getById(@Param(value = "id") Integer id);
 
-    /**
-     *
-     *
-     */
     @Update("update article set title=#{title},description=#{description},gmt_modified=#{gmtModified},tag=#{tag} where id=#{id}")
-    void update(Article article);
+    int update(Article article);
+
+    @Update("update article set view_count=view_count+1 where id=#{id}")
+    void updateViewCount(Article article);
 }

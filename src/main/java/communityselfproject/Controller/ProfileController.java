@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author qwj
@@ -32,7 +33,7 @@ public class ProfileController {
                           HttpServletRequest request){
 
 
-        User user = (User) request.getSession().getAttribute("user");
+        List<User> user =(List<User>)  request.getSession().getAttribute("user");
         if (user == null){
             return "redirect:/";
         }
@@ -48,9 +49,12 @@ public class ProfileController {
             default:
                 model.addAttribute("section","articles");
                 model.addAttribute("sectionName","我的文章");
+
+
         }
-        PaginationDTO paginationDTO = articleService.listById(user.getId(),page,size);
+        PaginationDTO paginationDTO = articleService.listById(user.get(0).getId(),page,size);
         model.addAttribute("articles",paginationDTO);
+
         return "profile";
     }
 }
